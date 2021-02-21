@@ -4,7 +4,7 @@ export default yup.object().shape({
   name: yup
     .string()
     .required("name is required")
-    .min(2, "username must be 2 character"),
+    .min(8, "Name must be 8 character"),
   pizzaSize: yup
     .string()
     .oneOf(["small", "medium", "large"], "size is required"),

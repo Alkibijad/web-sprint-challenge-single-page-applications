@@ -17,11 +17,12 @@ const App = () => {
         <Route path='/pizza'>
             <Form />
         </Route>
-        
-        <Route exact path='/'>
+   
+        <Route path='/'>
             <Home />
         </Route>
       </Switch>
+       
     </>
   );
 };

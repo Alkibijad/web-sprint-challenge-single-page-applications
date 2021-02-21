@@ -1,9 +1,10 @@
-
+//imports
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import * as yup from "yup";
 import schema from '../validation/Schema';
 
+//those are initial form values, setup state and the page to blank
 const initialValues = {
     name: '',
     text: '',
@@ -13,12 +14,13 @@ const initialValues = {
     chicken: false
 }
 
+//Thise are error state values
 const initialErrors = {
     name: '',
     text: '',
     pizzaSize: ''
 }
-
+//Form function 
 export  const Form = () => {
 
     const [orders, setOrders] = useState([])
@@ -37,25 +39,24 @@ export  const Form = () => {
         }
 
     const postNewOrder = newPizza => {
-        axios.post('https://reqres.in/api/users', newPizza)
+        axios
+        .post('https://reqres.in/api/users', newPizza)
         .then(res => {
             setOrders([res.data, ...orders])
             setForm(initialValues)
         })
+        .catch((Error) =>
+        console.log(Error))
     }
 
     const inputChange = (name, value) => {
         yup.reach(schema,name)
         .validate(value)
         .then(() => {
-            setFormErrors({
-                ...formErrors,[name]: ''
-            })
+            setFormErrors({...formErrors,[name]: ''})
         })
         .catch((err) => {
-            setFormErrors({
-              ...formErrors,
-              [name]: err.errors[0],
+            setFormErrors({...formErrors,[name]: err.errors[0],
             })
           })
 
@@ -83,13 +84,12 @@ export  const Form = () => {
     return (
         <div>
             <form onSubmit={onSubmit}>
-
+                
             <div>
-                <div>{formErrors.name}</div>
-                <div>{formErrors.pizzaSize}</div>
-            </div>
-
-            <div>
+                                <div>
+                                    <div>{formErrors.name}</div>
+                                    <div>{formErrors.pizzaSize}</div>
+                                </div>
                 <label>
                 Name:
                 <input 
@@ -105,14 +105,13 @@ export  const Form = () => {
             <label>
                 Pizza Size:
                 <select id='size' onChange={onChange} value={form.pizzaSize} name='pizzaSize'>
-                    <option value=''>==Select a size</option>
+                    <option value=''>--Select a size--</option>
                     <option value='large'>Large</option>
                     <option value='medium'>medium</option>
                     <option value='small'>small</option>
                 </select>
             </label>
             </div>
-
             <div>
             <label>
                 Cheese
