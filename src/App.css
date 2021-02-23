@@ -1,17 +1,48 @@
 body {
+  width: 99, 9%;
+  height: 1240px;
   display: flex;
   justify-content: center;
-
-  background-image: url(https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/MOD_Pizza_logo.svg/1200px-MOD_Pizza_logo.svg.png);
+  background-color: rgba(247, 247, 247, 0.5);
+  background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/MOD_Pizza_logo.svg/1200px-MOD_Pizza_logo.svg.png");
   background-repeat: no-repeat;
-
-  font-size: 30px;
+  background-attachment: fixed;
+  background-position: center;
+  border: 10px solid red;
 }
+
 .navbar {
-  font-size: 40px;
-  padding: 2%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  font-size: 50px;
+  width: 1250px;
+  height: 145px;
+  background-color: rgba(247, 247, 247, 0.5);
+  margin-top: 3%;
 }
 
-.a {
+.navbar a {
+  margin-left: 5%;
   text-decoration: none;
+  color: black;
+}
+
+.forma {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 10px solid white;
+  background-color: rgba(247, 247, 247, 0.5);
+  margin-left: 14%;
+  margin-right: 14%;
+  font-size: 50px;
+  margin-top: 10%;
+  height: 500px;
+}
+#submit-btn {
+  padding: 2%;
+  border-radius: 20px;
+  font-size: 20px;
+  color: red;
 }

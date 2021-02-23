@@ -11,5 +11,6 @@ export default yup.object().shape({
   cheese: yup.boolean(),
   chicken: yup.boolean(),
   peperoni: yup.boolean(),
-  text: yup.string()
+  text: yup.string(),
+  pizzaName:yup.string()
 });

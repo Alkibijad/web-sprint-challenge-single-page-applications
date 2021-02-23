@@ -1,14 +1,13 @@
-//imports
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import * as yup from "yup";
 import schema from '../validation/Schema';
 
-//those are initial form values, setup state and the page to blank
 const initialValues = {
     name: '',
     text: '',
-    pizzaSize: '',
+    pizzaName: '',
+    sauce:false,
     cheese: false,
     peperoni: false,
     chicken: false
@@ -18,10 +17,10 @@ const initialValues = {
 const initialErrors = {
     name: '',
     text: '',
-    pizzaSize: ''
+    pizzaName: ''
 }
-//Form function 
-export  const Form = () => {
+
+export default function Form2(){
 
     const [orders, setOrders] = useState([])
     const [form, setForm] = useState(initialValues)
@@ -32,8 +31,8 @@ export  const Form = () => {
             const newPizza = {
                 name: form.name.trim(),
                 text:form.text.trim(),
-                pizzaSize: form.pizzaSize,
-                toppings: ['cheese', 'chicken', 'peperoni'].filter(item => form[item])
+                pizzaName: form.pizzaName,
+                extra: ['sauce','cheese','chicken','peperoni '].filter(item => form[item])
             }
             postNewOrder(newPizza)
         }
@@ -79,10 +78,9 @@ export  const Form = () => {
         const valueToUse = type === 'checkbox' ? checked : value
         inputChange(name, valueToUse)
     }
-    
     return (
         <div>
-           
+          
             <form onSubmit={onSubmit}>
                 
             <div>
@@ -105,17 +103,18 @@ export  const Form = () => {
             <div>
             <label>
                 Pizza Size:
-                <select id='size' onChange={onChange} value={form.pizzaSize} name='pizzaSize'>
-                    <option value=''>--Pizza Size--</option>
-                    <option value='large'>Large</option>
-                    <option value='medium'>medium</option>
-                    <option value='small'>small</option>
+                <select id='pizzaName' onChange={onChange} value={form.pizzaName} name='pizzaName'>
+                    <option value=''>--Choose pizza--</option>
+                    <option value='Margarita'>Margarita</option>
+                    <option value='Napolitana'>Napolitana</option>
+                    <option value='Mexicana'>Mexicana</option>
                 </select>
             </label>
             </div>
+
             <div>
             <label>
-                Cheese
+                Extra Cheese
                 <input
                     type="checkbox"
                     name="cheese"
@@ -127,7 +126,19 @@ export  const Form = () => {
 
             <div>
             <label>
-                Chicken
+                Extra Sauce
+                <input
+                    type="checkbox"
+                    name="cheese"
+                    checked={form.sauce}
+                    onChange={onChange}
+                />
+            </label>
+            </div>
+
+            <div>
+            <label>
+                Extra Chicken
                 <input
                     type="checkbox"
                     name="chicken"
@@ -139,7 +150,7 @@ export  const Form = () => {
 
             <div>
             <label>
-                Peperoni
+                Extra Peperoni
                 <input
                     type="checkbox"
                     name="peperoni"
@@ -161,9 +172,8 @@ export  const Form = () => {
             </label>
             </div>
 
-            
-        <button id='submit-btn' disabled={disabled}>Place your order</button>
-                </div>
+            <button id='submit-btn' disabled={disabled}>Place your order</button>
+            </div>
             </form>
 
             <div>
@@ -171,13 +181,11 @@ export  const Form = () => {
                  <div key={item.id}>
                     <h1>Name: {item.name}</h1>
                     <p>Special Instructions: {item.text}</p>
-                    <p>Size: {item.pizzaSize}</p>
-                    <p>Toppings: {item.toppings}</p>
+                    <p>Name: {item.pizzaName}</p>
+                    <p>Extra: {item.extra}</p>
                     <p>Order Date: {item.createdAt}</p>
                  </div>)}
             </div>
         </div>
     )
-};
-
-export default Form;
+}
